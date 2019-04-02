@@ -128,8 +128,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'nome' => [
+            'required' => 'O campo :attribute é obrigatório!',
         ],
     ],
 

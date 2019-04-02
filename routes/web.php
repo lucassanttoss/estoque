@@ -1,5 +1,11 @@
 <?php
 
+
+use estoque\User;
+use estoque\Http\Controllers\Controller;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -11,10 +17,30 @@
 |
 */
 
-Route::get('/', function(){
-    return 'Primeira logica';
-});
-
 Route::get('/produtos', 'ProdutoController@lista');
 
-Route::get('/produtos/mostra/{id}', 'ProdutoController@mostra');
+Route::get(
+    '/produtos/mostra/{id}',
+    'ProdutoController@mostra'
+)
+->where('id', '[0-9]+');
+
+Route::get('/produtos/novo', 'ProdutoController@novo');
+
+Route::post('/produtos/adiciona', 'ProdutoController@adiciona');
+
+Route::get('/produtos/json', 'ProdutoController@listaJson');
+
+Route::get('/produtos/remove/{id}', 'ProdutoController@remove');
+
+Route::get('/login', 'LoginController@login');
+
+Route::get('/produtos/remove/{id}', [
+    'middleware' => 'nosso-middleware',
+    'uses' => 'ProdutoController@remove'
+]);
+
+Auth::routes();
+Route::get('/home', 'HomeController@index')->name('home');
+
+

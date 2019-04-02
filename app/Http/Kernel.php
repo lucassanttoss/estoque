@@ -1,6 +1,4 @@
-<?php
-
-namespace estoque\Http;
+<?php namespace estoque\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -14,11 +12,13 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $middleware = [
-        \estoque\Http\Middleware\CheckForMaintenanceMode::class,
-        \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
-        \estoque\Http\Middleware\TrimStrings::class,
-        \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        \estoque\Http\Middleware\TrustProxies::class,
+        // outros registros omitidos
+        /*
+        'Illuminate\Session\Middleware\StartSession',
+        'Illuminate\View\Middleware\ShareErrorsFromSession',
+        'estoque\Http\Middleware\VerifyCsrfToken',
+        'estoque\Http\Middleware\AutorizacaoMiddleware',
+*/
     ];
 
     /**
@@ -53,6 +53,7 @@ class Kernel extends HttpKernel
     protected $routeMiddleware = [
         'auth' => \estoque\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
+        /*
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
@@ -60,6 +61,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        */
+        'guest' => 'estoque\Http\Middleware\RedirectIfAuthenticated',
+        'nosso-middleware' => 'estoque\Http\Middleware\AutorizacaoMiddleware',
     ];
 
     /**
