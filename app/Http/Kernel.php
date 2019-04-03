@@ -13,12 +13,12 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         // outros registros omitidos
-        /*
-        'Illuminate\Session\Middleware\StartSession',
-        'Illuminate\View\Middleware\ShareErrorsFromSession',
-        'estoque\Http\Middleware\VerifyCsrfToken',
-        'estoque\Http\Middleware\AutorizacaoMiddleware',
-*/
+        
+        //'Illuminate\Session\Middleware\StartSession',
+        //'Illuminate\View\Middleware\ShareErrorsFromSession',
+        //'estoque\Http\Middleware\VerifyCsrfToken',
+        //'estoque\Http\Middleware\AutorizacaoMiddleware',
+
     ];
 
     /**

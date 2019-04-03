@@ -1,19 +1,3 @@
-nav.navbar.navbar-default {
-    background-color: #337ab7;
-    border-color: #2e6da4;
-    margin-top: 10px;
-}
-
-nav.navbar.navbar-default a {
-    color: white;
-}
-
-li p.navbar-text,
-a.navbar-brand {
-    color: white !important;
-    font-weight: bolder;
-}
-
 footer.footer {
     background-color: #337ab7;
     border-color: #2e6da4;
@@ -25,3 +9,32 @@ footer.footer {
 footer.footer p {
     padding: 10px;
 }
+
+div.container-fluid{
+    margin-top: 20px;
+}
+
+h1{
+    margin-bottom:20px;
+    text-align: center;
+}
+.page-footer{
+    background-color: #337ab7;
+    border-radius: none;
+    padding-bottom: 10px;
+    color: #fff;
+    margin-top: 50px;
+}
+.page-footer a{
+    color: white;
+    text-decoration: none;
+}
+
+.page-footer span{
+    font-size: 18px;
+}
+@media (min-width: 1200px) {
+    .container-fluid{
+        max-width: 1000px;
+    }
+ }

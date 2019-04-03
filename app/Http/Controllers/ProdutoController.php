@@ -1,12 +1,16 @@
 <?php namespace estoque\Http\Controllers;
+//use Request;
+use Illuminate\Support\Facades\DB;
+use estoque\Http\Requests\ProdutosRequest;
 use estoque\Produto;
 use Request;
-use estoque\Http\Requests\ProdutosRequest;
+use estoque\Http\Controllers\Controller;
+use Illuminate\Database\Eloquent\Model;
 
 class ProdutoController extends Controller {
 
     public function __construct(){
-        $this->middleware('auth', ['only' => ['adiciona', 'remove']]);
+        $this->middleware('auth', ['only' => ['adiciona', 'editar', 'altera', 'novo']]);
     }
 
     public function lista(){
@@ -15,7 +19,7 @@ class ProdutoController extends Controller {
         return view('produto.listagem')->with('produtos', $produtos);
     }
 
-    public function  mostra($id){
+    public function mostra($id){
 
         $produto = Produto::find($id);
         if(empty($produto)) {
@@ -29,12 +33,23 @@ class ProdutoController extends Controller {
     }
 
     public function adiciona(ProdutosRequest $request){
-        
-        Produto::create($request::all());
+
+        $params = Request::all();
+        $produto = new Produto($params);
+        $produto->save();
 
         return redirect()
             ->action('ProdutoController@lista')
             ->WithInput(Request::only('nome'));
+    }
+
+    public function altera(ProdutosRequest $request, $id){
+        $params = Request::all();
+        $produto = Produto::find($id);
+        $produto->update($params);
+
+        return redirect()->action('ProdutoController@lista')->withInput(Request::only('id'));
+    
     }
 
     public function listaJson(){
@@ -47,5 +62,12 @@ class ProdutoController extends Controller {
         $produto->delete();
         return redirect()->action('ProdutoController@lista');
     }
-        
+
+    public function editar($id){
+        $produto = Produto::find($id);
+        if(empty($produto)){
+            return "Prduto inexistente! :(";
+        }
+        return view('produto.editar')->with('p',$produto);
+    }  
 }

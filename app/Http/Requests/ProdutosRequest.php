@@ -21,19 +21,21 @@ class ProdutosRequest extends FormRequest
      *
      * @return array
      */
+    
     public function rules()
     {
         return [
             'nome' => 'required|max:100',
             'descricao' => 'required|max:255',
-            'valor' => 'required|numeric'
-        ];
+            'valor' => 'required|numeric',
+            'quantidade' => 'required'
+            ];
     }
 
     public function messages(){
         return[
             'nome.required' => 'O campo :attribute é obrigatorio.',
-            'required' => 'The :attribute field can not be empty.'
+            'required' => 'O campo :attribute é obrigatório.'
         ];
     }
 }

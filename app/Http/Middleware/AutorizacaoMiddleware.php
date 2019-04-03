@@ -12,9 +12,11 @@ class AutorizacaoMiddleware {
      */
     public function handle($request, Closure $next)
     {
-        if(!$request->is('auth/login') && \Auth::guest()) {
+        
+        if(\Auth::guest()) {
             return redirect('login');
         }
+
         return $next($request);
     }
 }

@@ -25,9 +25,16 @@ Route::get(
 )
 ->where('id', '[0-9]+');
 
-Route::get('/produtos/novo', 'ProdutoController@novo');
+Route::get(
+    '/produtos/editar/{id}',
+    'ProdutoController@editar'
+);
 
-Route::post('/produtos/adiciona', 'ProdutoController@adiciona');
+Route::post('/produtos/altera/{id}', 'ProdutoController@altera');
+
+Route::get('/produtos/adiciona', 'ProdutoController@novo');
+
+Route::post('/produtos/novo', 'ProdutoController@adiciona');
 
 Route::get('/produtos/json', 'ProdutoController@listaJson');
 
@@ -35,12 +42,15 @@ Route::get('/produtos/remove/{id}', 'ProdutoController@remove');
 
 Route::get('/login', 'LoginController@login');
 
+Route::get('/', 'ProdutoController@lista');
+
 Route::get('/produtos/remove/{id}', [
     'middleware' => 'nosso-middleware',
     'uses' => 'ProdutoController@remove'
 ]);
 
 Auth::routes();
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'ProdutoController@lista')->name('home');
+
 
 
